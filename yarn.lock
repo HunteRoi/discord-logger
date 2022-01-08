@@ -1205,6 +1205,13 @@ dot-prop@^6.0.1:
   dependencies:
     is-obj "^2.0.0"
 
+efate@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/efate/-/efate-0.5.1.tgz#11c8344d151f6b55dd9be5acbad77d982e789e65"
+  integrity sha512-jLg9L6WEljTZbotPUywXgeZmV0udu06Bfh2sj7yRbxyitUohBM8wDqoQfhPq2tFq+yqxWjwSsvmUCQ3ka1D2/w==
+  dependencies:
+    debug "^4.1.1"
+
 electron-to-chromium@^1.4.17:
   version "1.4.36"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.36.tgz#446c6184dbe5baeb5eae9a875490831e4bc5319a"
@@ -1291,6 +1298,11 @@ expect@>=22.0.0, expect@^27.4.6:
     jest-get-type "^27.4.0"
     jest-matcher-utils "^27.4.6"
     jest-message-util "^27.4.6"
+
+faker@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-5.5.3.tgz#c57974ee484431b25205c2c8dc09fda861e51e0e"
+  integrity sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==
 
 fast-json-stable-stringify@2.x, fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
@@ -2187,6 +2199,13 @@ mkdirp@^0.5.3:
   dependencies:
     minimist "^1.2.5"
 
+moq.ts@^7.3.4:
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/moq.ts/-/moq.ts-7.3.4.tgz#982c3b195a54fd58c7a40a84e37a870374d15927"
+  integrity sha512-rOelPx7ns+RzyliPwHH2wFVqGowITKRQtECLvVKhiIt4oM4r2hYq4AmgQh0NpWlMxWl2fuZtPJhikrhVpAoF5g==
+  dependencies:
+    tslib "2.1.0"
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -2706,6 +2725,11 @@ ts-sinon@^2.0.2:
     "@types/sinon" "^9.0.5"
     "@types/sinon-chai" "^3.2.4"
     sinon "^9.0.3"
+
+tslib@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
+  integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
 
 tslib@^1.13.0, tslib@^1.8.1:
   version "1.14.1"

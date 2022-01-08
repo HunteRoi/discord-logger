@@ -7,8 +7,13 @@
 		"strict": true,
 		"resolveJsonModule": true,
 		"strictNullChecks": false,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"baseUrl": "./src",
+		"paths": {
+			"@handlers/*": ["handlers/*"],
+			"@types/*": ["types/*"]
+		}
 	},
 	"include": ["src/**/*"],
-	"exclude": ["lib/*"]
+	"exclude": ["lib/*", "coverage/*"]
 }
