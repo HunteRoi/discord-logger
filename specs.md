@@ -10,22 +10,23 @@ Un module de logging est une classe qui contient des méthodes pour logger chaqu
 
 ### Guild
 
-| Event(s) DiscordJS | Event(s) Discord-Logs   | Description |
-| ------------------ | ----------------------- | ----------- |
-| guildUpdate        | guildBannerAdd          |             |
-| guildUpdate        | guildAfkChannelAdd      |             |
-| guildUpdate        | guildVanityURLRemove    |             |
-| guildUpdate        | guildVanityURLUpdate    |             |
-| guildUpdate        | guildFeaturesUpdate     |             |
-| guildUpdate        | guildAcronymUpdate      |             |
-| guildUpdate        | guildOwnerUpdate        |             |
-| guildUpdate        | guildPartnerAdd         |             |
-| guildUpdate        | guildPartnerRemove      |             |
-| guildUpdate        | guildVerificationAdd    |             |
-| guildUpdate        | guildVerificationRemove |             |
-| guildUpdate        | guildBoostLevelUp       |             |
-| guildUpdate        | guildBoostLevelDown     |             |
-| guildUpdate        | unhandledGuildUpdate    |             |
+| Event(s) DiscordJS      | Event(s) Discord-Logs   | Description |
+| ----------------------- | ----------------------- | ----------- |
+| guildUpdate             | guildBannerAdd          |             |
+| guildUpdate             | guildAfkChannelAdd      |             |
+| guildUpdate             | guildVanityURLRemove    |             |
+| guildUpdate             | guildVanityURLUpdate    |             |
+| guildUpdate             | guildFeaturesUpdate     |             |
+| guildUpdate             | guildAcronymUpdate      |             |
+| guildUpdate             | guildOwnerUpdate        |             |
+| guildUpdate             | guildPartnerAdd         |             |
+| guildUpdate             | guildPartnerRemove      |             |
+| guildUpdate             | guildVerificationAdd    |             |
+| guildUpdate             | guildVerificationRemove |             |
+| guildUpdate             | guildBoostLevelUp       |             |
+| guildUpdate             | guildBoostLevelDown     |             |
+| guildUpdate             | unhandledGuildUpdate    |             |
+| guildIntegrationsUpdate |                         |             |
 
 ### Guild Invites
 
@@ -36,21 +37,24 @@ Un module de logging est une classe qui contient des méthodes pour logger chaqu
 
 ### Guild Channels
 
-| Event(s) DiscordJS | Event(s) Discord-Logs           | Description |
-| ------------------ | ------------------------------- | ----------- |
-| channelCreate      |                                 |             |
-| channelDelete      |                                 |             |
-| channelUpdate      | guildChannelPermissionsUpdate   |             |
-| channelUpdate      | guildChannelTopicUpdate         |             |
-| channelUpdate      | unhandledGuildChannelUpdate     |             |
-| threadCreate       |                                 |             |
-| threadDelete       |                                 |             |
-| threadUpdate       | threadStateUpdate               |             |
-| threadUpdate       | threadNameUpdate                |             |
-| threadUpdate       | threadLockStateUpdate           |             |
-| threadUpdate       | threadRateLimitPerUserUpdate    |             |
-| threadUpdate       | threadAutoArchiveDurationUpdate |             |
-| threadUpdate       | unhandledThreadUpdate           |             |
+| Event(s) DiscordJS  | Event(s) Discord-Logs           | Description |
+| ------------------- | ------------------------------- | ----------- |
+| channelCreate       |                                 |             |
+| channelDelete       |                                 |             |
+| channelUpdate       | guildChannelPermissionsUpdate   |             |
+| channelUpdate       | guildChannelTopicUpdate         |             |
+| channelUpdate       | unhandledGuildChannelUpdate     |             |
+| threadCreate        |                                 |             |
+| threadDelete        |                                 |             |
+| threadUpdate        | threadStateUpdate               |             |
+| threadUpdate        | threadNameUpdate                |             |
+| threadUpdate        | threadLockStateUpdate           |             |
+| threadUpdate        | threadRateLimitPerUserUpdate    |             |
+| threadUpdate        | threadAutoArchiveDurationUpdate |             |
+| threadUpdate        | unhandledThreadUpdate           |             |
+| threadMembersUpdate |                                 |             |
+| threadMemberUpdate  |                                 |             |
+| webhookUpdate       |                                 |             |
 
 ### Guild Resources (emojis, stickers)
 
@@ -113,13 +117,17 @@ Un module de logging est une classe qui contient des méthodes pour logger chaqu
 
 ### Messages
 
-| Event(s) DiscordJS | Event(s) Discord-Logs  | Description |
-| ------------------ | ---------------------- | ----------- |
-| messageCreate      |                        |             |
-| messageDelete      |                        |             |
-| messageUpdate      | messagePinned          |             |
-| messageUpdate      | messageContentEdited   |             |
-| messageUpdate      | unhandledMessageUpdate |             |
+| Event(s) DiscordJS                 | Event(s) Discord-Logs  | Description |
+| ---------------------------------- | ---------------------- | ----------- |
+| messageCreate                      |                        |             |
+| messageDelete                      |                        |             |
+| messageUpdate<br>channelPinsUpdate | messagePinned          |             |
+| messageUpdate                      | messageContentEdited   |             |
+| messageUpdate                      | unhandledMessageUpdate |             |
+| messageReactionAdd                 |                        |             |
+| messageReactionRemove              |                        |             |
+| messageReactionRemoveAll           |                        |             |
+| messageReactionRemoveEmoji         |                        |             |
 
 ### Voice
 
