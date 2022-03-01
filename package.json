@@ -4,7 +4,8 @@
 	"description": "A superset of events on top of DiscordJS ones, enabling to log events occuring in your guild",
 	"main": "lib/index.js",
 	"scripts": {
-		"test": "jest --coverage",
+		"test": "jest",
+		"test:coverage": "jest --coverage",
 		"build": "tsc",
 		"build:docs": "typedoc --out docs src/index.ts",
 		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" --tab-width 4",

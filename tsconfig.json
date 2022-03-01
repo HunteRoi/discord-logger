@@ -11,9 +11,9 @@
 		"baseUrl": "./src",
 		"paths": {
 			"@handlers/*": ["handlers/*"],
-			"@types/*": ["types/*"]
+			"@types": ["types/index.ts"]
 		}
 	},
 	"include": ["src/**/*"],
-	"exclude": ["lib/*", "coverage/*"]
+	"exclude": ["lib/*", "coverage/*", "tcr"]
 }
