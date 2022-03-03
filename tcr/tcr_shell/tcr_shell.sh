@@ -221,6 +221,7 @@ tcr_test() {
 
 tcr_commit() {
   tcr_info "Committing changes on branch ${GIT_WORKING_BRANCH}"
+  git add *
   git commit -am TCR
   if [ "${AUTO_PUSH_MODE}" -eq 1 ]; then
     tcr_push
