@@ -19,9 +19,13 @@ describe('LoggerManager', () => {
 		);
 	});
 
-	it('should throw errow when "modules" is undefined or null', () => {
+	it('should throw error when "modules" is undefined or null', () => {
 		expect(() => new LoggerManager(options, null)).toThrowError(
 			'You must provide valid modules!'
 		);
+	});
+
+	it('should not throw error when "modules" is not defined', () => {
+		expect(() => new LoggerManager(options)).not.toBeNull();
 	});
 });
