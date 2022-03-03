@@ -1,10 +1,13 @@
+import { Client } from 'discord.js';
 import { LoggerManager, LoggerOptions, IModule } from '../src';
 
 describe('LoggerManager', () => {
 	let options: LoggerOptions;
 	let modules: IModule[];
+	let client: Client;
 
 	beforeEach(() => {
+		client = new Client({ intents: [] });
 		options = {};
 		modules = [];
 	});
