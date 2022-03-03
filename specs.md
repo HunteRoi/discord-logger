@@ -87,23 +87,23 @@ Un module de logging est une classe qui contient des méthodes pour logger chaqu
 
 ### Guild Members
 
-| Event(s) DiscordJS                                          | Event(s) Discord-Logs                                 | Description                 |
-| ----------------------------------------------------------- | ----------------------------------------------------- | --------------------------- |
-| guildMemberAdd                                              | guildMemberEntered                                    |                             |
-| guildMemberRemove                                           |                                                       | kick                        |
-| guildMemberRemove<br>guildBanAdd                            |                                                       | ban                         |
-| guildBanRemove                                              |                                                       | unban                       |
-| guildMemberRemove                                           |                                                       | leave                       |
-| guildMemberUpdate                                           | guildMemberNicknameUpdate                             |                             |
-| guildMemberUpdate                                           | guildMemberRoleAdd<br>guildMemberRoleRemove           | role:\<id>                  |
-| guildMemberUpdate                                           | guildMemberBoost                                      |                             |
-| guildMemberUpdate                                           | guildMemberUnboost                                    |                             |
-| guildScheduledEventUserAdd<br>guildScheduledEventUserRemove |                                                       | event:\<id>                 |
-| guildMemberUpdate                                           | guildMemberOnline                                     |                             |
-| guildMemberUpdate                                           | guildMemberOffline                                    |                             |
-| guildMemberUpdate                                           |                                                       | member accepted guild rules |
-| guildMemberUpdate                                           |                                                       | member got timed out        |
-| guildMemberUpdate                                           | unhandledPresenceUpdate<br>unhandledGuildMemberUpdate |                             |
+| Event(s) DiscordJS                                           | Event(s) Discord-Logs                                  | Description                 |
+| ------------------------------------------------------------ | ------------------------------------------------------ | --------------------------- |
+| guildMemberAdd                                               | guildMemberEntered                                     |                             |
+| guildMemberRemove                                            |                                                        | kick                        |
+| guildMemberRemove<br/>guildBanAdd                            |                                                        | ban                         |
+| guildBanRemove                                               |                                                        | unban                       |
+| guildMemberRemove                                            |                                                        | leave                       |
+| guildMemberUpdate                                            | guildMemberNicknameUpdate                              |                             |
+| guildMemberUpdate                                            | guildMemberRoleAdd<br/>guildMemberRoleRemove           | role:&lt;id&gt;             |
+| guildMemberUpdate                                            | guildMemberBoost                                       |                             |
+| guildMemberUpdate                                            | guildMemberUnboost                                     |                             |
+| guildScheduledEventUserAdd<br/>guildScheduledEventUserRemove |                                                        | event:&lt;id&gt;            |
+| guildMemberUpdate                                            | guildMemberOnline                                      |                             |
+| guildMemberUpdate                                            | guildMemberOffline                                     |                             |
+| guildMemberUpdate                                            |                                                        | member accepted guild rules |
+| guildMemberUpdate                                            |                                                        | member got timed out        |
+| guildMemberUpdate                                            | unhandledPresenceUpdate<br/>unhandledGuildMemberUpdate |                             |
 
 ### User
 
@@ -117,17 +117,17 @@ Un module de logging est une classe qui contient des méthodes pour logger chaqu
 
 ### Messages
 
-| Event(s) DiscordJS                 | Event(s) Discord-Logs  | Description |
-| ---------------------------------- | ---------------------- | ----------- |
-| messageCreate                      |                        |             |
-| messageDelete                      |                        |             |
-| messageUpdate<br>channelPinsUpdate | messagePinned          |             |
-| messageUpdate                      | messageContentEdited   |             |
-| messageUpdate                      | unhandledMessageUpdate |             |
-| messageReactionAdd                 |                        |             |
-| messageReactionRemove              |                        |             |
-| messageReactionRemoveAll           |                        |             |
-| messageReactionRemoveEmoji         |                        |             |
+| Event(s) DiscordJS                  | Event(s) Discord-Logs  | Description |
+| ----------------------------------- | ---------------------- | ----------- |
+| messageCreate                       |                        |             |
+| messageDelete                       |                        |             |
+| messageUpdate<br/>channelPinsUpdate | messagePinned          |             |
+| messageUpdate                       | messageContentEdited   |             |
+| messageUpdate                       | unhandledMessageUpdate |             |
+| messageReactionAdd                  |                        |             |
+| messageReactionRemove               |                        |             |
+| messageReactionRemoveAll            |                        |             |
+| messageReactionRemoveEmoji          |                        |             |
 
 ### Voice
 
