@@ -6,14 +6,16 @@ describe('EventParser', () => {
 	});
 
 	describe('getRequirements', () => {
-		// arrange
-		const event = 'test';
-		const expected = 'ok';
+		it('should return the expected string', () => {
+			// arrange
+			const event = 'test';
+			const expected = 'ok';
 
-		// act
-		const actual = new EventParser().getRequirements(event);
+			// act
+			const actual = new EventParser().getRequirements(event);
 
-		// assert
-		expect(() => expected === actual).toBeTruthy();
+			// assert
+			expect(() => expected === actual).toBeTruthy();
+		});
 	});
 });
