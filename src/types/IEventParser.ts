@@ -1,3 +1,3 @@
 export interface IEventParser {
-	getRequirements(event: string): any;
+	getRequirements(event: string): string;
 }
