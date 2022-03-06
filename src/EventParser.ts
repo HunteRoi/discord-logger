@@ -110,7 +110,10 @@ const eventsByIntents: EventsByIntent = {
         GatewayDispatchEvents.GuildScheduledEventUserRemove
     ],
 
-    [GatewayIntentBits.MessageContent]: []
+    [GatewayIntentBits.MessageContent]: [
+        /*GatewayDispatchEvents.MessageCreate,
+		GatewayDispatchEvents.MessageUpdate*/
+    ]
 };
 
 export class EventParser implements IEventParser {
