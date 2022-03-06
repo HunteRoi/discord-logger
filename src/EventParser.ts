@@ -1,110 +1,128 @@
-import { Constants, Intents } from 'discord.js';
+import { Intents, IntentsString } from 'discord.js';
+import {
+    GatewayDispatchEvents,
+    GatewayIntentBits
+} from 'discord-api-types/v10';
 
 import { IEventParser } from '@types';
 
-type EventsByIntent = { [key: number]: string[] };
+type EventsByIntent = { [K in GatewayIntentBits]: GatewayDispatchEvents[] };
 
 const eventsByIntents: EventsByIntent = {
-    [Intents.FLAGS.GUILDS]: [
-        Constants.Events.GUILD_CREATE,
-        Constants.Events.GUILD_UPDATE,
-        Constants.Events.GUILD_DELETE,
-        Constants.Events.GUILD_ROLE_CREATE,
-        Constants.Events.GUILD_ROLE_UPDATE,
-        Constants.Events.GUILD_ROLE_DELETE,
-        Constants.Events.CHANNEL_CREATE,
-        Constants.Events.CHANNEL_UPDATE,
-        Constants.Events.CHANNEL_DELETE,
-        Constants.Events.CHANNEL_PINS_UPDATE,
-        Constants.Events.THREAD_CREATE,
-        Constants.Events.THREAD_UPDATE,
-        Constants.Events.THREAD_DELETE,
-        Constants.Events.THREAD_LIST_SYNC,
-        Constants.Events.THREAD_MEMBER_UPDATE,
-        Constants.Events.THREAD_MEMBERS_UPDATE,
-        Constants.Events.STAGE_INSTANCE_CREATE,
-        Constants.Events.STAGE_INSTANCE_UPDATE,
-        Constants.Events.STAGE_INSTANCE_DELETE
+    [GatewayIntentBits.Guilds]: [
+        GatewayDispatchEvents.GuildCreate,
+        GatewayDispatchEvents.GuildUpdate,
+        GatewayDispatchEvents.GuildDelete,
+        GatewayDispatchEvents.GuildRoleCreate,
+        GatewayDispatchEvents.GuildRoleUpdate,
+        GatewayDispatchEvents.GuildRoleDelete,
+        GatewayDispatchEvents.ChannelCreate,
+        GatewayDispatchEvents.ChannelUpdate,
+        GatewayDispatchEvents.ChannelDelete,
+        GatewayDispatchEvents.ChannelPinsUpdate,
+        GatewayDispatchEvents.ThreadCreate,
+        GatewayDispatchEvents.ThreadUpdate,
+        GatewayDispatchEvents.ThreadDelete,
+        GatewayDispatchEvents.ThreadListSync,
+        GatewayDispatchEvents.ThreadMemberUpdate,
+        GatewayDispatchEvents.ThreadMembersUpdate,
+        GatewayDispatchEvents.StageInstanceCreate,
+        GatewayDispatchEvents.StageInstanceUpdate,
+        GatewayDispatchEvents.StageInstanceDelete
     ],
 
-    [Intents.FLAGS.GUILD_MEMBERS]: [
-        Constants.Events.GUILD_MEMBER_ADD,
-        Constants.Events.GUILD_MEMBER_UPDATE,
-        Constants.Events.GUILD_MEMBER_REMOVE,
-        Constants.Events.THREAD_MEMBERS_UPDATE
+    [GatewayIntentBits.GuildMembers]: [
+        GatewayDispatchEvents.GuildMemberAdd,
+        GatewayDispatchEvents.GuildMemberUpdate,
+        GatewayDispatchEvents.GuildMemberRemove,
+        GatewayDispatchEvents.ThreadMembersUpdate
     ],
 
-    [Intents.FLAGS.GUILD_BANS]: [
-        Constants.Events.GUILD_BAN_ADD,
-        Constants.Events.GUILD_BAN_REMOVE
+    [GatewayIntentBits.GuildBans]: [
+        GatewayDispatchEvents.GuildBanAdd,
+        GatewayDispatchEvents.GuildBanRemove
     ],
 
-    [Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS]: [
-        Constants.Events.GUILD_EMOJI_UPDATE,
-        Constants.Events.GUILD_STICKER_UPDATE
+    [GatewayIntentBits.GuildEmojisAndStickers]: [
+        GatewayDispatchEvents.GuildEmojisUpdate,
+        GatewayDispatchEvents.GuildStickersUpdate
     ],
 
-    [Intents.FLAGS.GUILD_INTEGRATIONS]: [
-        Constants.Events.GUILD_INTEGRATIONS_UPDATE
-        /*Constants.Events.INTEGRATION_CREATE,
-		Constants.Events.INTEGRATION_UPDATE,
-		Constants.Events.INTEGRATION_DELETE*/
+    [GatewayIntentBits.GuildIntegrations]: [
+        GatewayDispatchEvents.GuildIntegrationsUpdate,
+        GatewayDispatchEvents.IntegrationCreate,
+        GatewayDispatchEvents.IntegrationUpdate,
+        GatewayDispatchEvents.IntegrationDelete
     ],
 
-    [Intents.FLAGS.GUILD_WEBHOOKS]: [Constants.Events.WEBHOOKS_UPDATE],
+    [GatewayIntentBits.GuildWebhooks]: [GatewayDispatchEvents.WebhooksUpdate],
 
-    [Intents.FLAGS.GUILD_INVITES]: [
-        Constants.Events.INVITE_CREATE,
-        Constants.Events.INVITE_DELETE
+    [GatewayIntentBits.GuildInvites]: [
+        GatewayDispatchEvents.InviteCreate,
+        GatewayDispatchEvents.InviteDelete
     ],
 
-    [Intents.FLAGS.GUILD_VOICE_STATES]: [Constants.Events.VOICE_STATE_UPDATE],
-
-    [Intents.FLAGS.GUILD_PRESENCES]: [Constants.Events.PRESENCE_UPDATE],
-
-    [Intents.FLAGS.GUILD_MESSAGES]: [
-        Constants.Events.MESSAGE_CREATE,
-        Constants.Events.MESSAGE_UPDATE,
-        Constants.Events.MESSAGE_DELETE,
-        Constants.Events.MESSAGE_BULK_DELETE
+    [GatewayIntentBits.GuildVoiceStates]: [
+        GatewayDispatchEvents.VoiceStateUpdate
     ],
 
-    [Intents.FLAGS.GUILD_MESSAGE_REACTIONS]: [
-        Constants.Events.MESSAGE_REACTION_ADD,
-        Constants.Events.MESSAGE_REACTION_REMOVE,
-        Constants.Events.MESSAGE_REACTION_REMOVE_ALL,
-        Constants.Events.MESSAGE_REACTION_REMOVE_EMOJI
+    [GatewayIntentBits.GuildPresences]: [GatewayDispatchEvents.PresenceUpdate],
+
+    [GatewayIntentBits.GuildMessages]: [
+        GatewayDispatchEvents.MessageCreate,
+        GatewayDispatchEvents.MessageUpdate,
+        GatewayDispatchEvents.MessageDelete,
+        GatewayDispatchEvents.MessageDeleteBulk
     ],
 
-    [Intents.FLAGS.GUILD_MESSAGE_TYPING]: [Constants.Events.TYPING_START],
-
-    [Intents.FLAGS.DIRECT_MESSAGES]: [
-        Constants.Events.MESSAGE_CREATE,
-        Constants.Events.MESSAGE_UPDATE,
-        Constants.Events.MESSAGE_DELETE,
-        Constants.Events.CHANNEL_PINS_UPDATE
+    [GatewayIntentBits.GuildMessageReactions]: [
+        GatewayDispatchEvents.MessageReactionAdd,
+        GatewayDispatchEvents.MessageReactionRemove,
+        GatewayDispatchEvents.MessageReactionRemoveAll,
+        GatewayDispatchEvents.MessageReactionRemoveEmoji
     ],
 
-    [Intents.FLAGS.DIRECT_MESSAGE_REACTIONS]: [
-        Constants.Events.MESSAGE_REACTION_ADD,
-        Constants.Events.MESSAGE_REACTION_REMOVE,
-        Constants.Events.MESSAGE_REACTION_REMOVE_ALL,
-        Constants.Events.MESSAGE_REACTION_REMOVE_EMOJI
+    [GatewayIntentBits.GuildMessageTyping]: [GatewayDispatchEvents.TypingStart],
+
+    [GatewayIntentBits.DirectMessages]: [
+        GatewayDispatchEvents.MessageCreate,
+        GatewayDispatchEvents.MessageUpdate,
+        GatewayDispatchEvents.MessageDelete,
+        GatewayDispatchEvents.ChannelPinsUpdate
     ],
 
-    [Intents.FLAGS.DIRECT_MESSAGE_TYPING]: [Constants.Events.TYPING_START],
+    [GatewayIntentBits.DirectMessageReactions]: [
+        GatewayDispatchEvents.MessageReactionAdd,
+        GatewayDispatchEvents.MessageReactionRemove,
+        GatewayDispatchEvents.MessageReactionRemoveAll,
+        GatewayDispatchEvents.MessageReactionRemoveEmoji
+    ],
 
-    [Intents.FLAGS.GUILD_SCHEDULED_EVENTS]: [
-        Constants.Events.GUILD_SCHEDULED_EVENT_CREATE,
-        Constants.Events.GUILD_SCHEDULED_EVENT_UPDATE,
-        Constants.Events.GUILD_SCHEDULED_EVENT_DELETE,
-        Constants.Events.GUILD_SCHEDULED_EVENT_USER_ADD,
-        Constants.Events.GUILD_SCHEDULED_EVENT_USER_REMOVE
-    ]
+    [GatewayIntentBits.DirectMessageTyping]: [
+        GatewayDispatchEvents.TypingStart
+    ],
+
+    [GatewayIntentBits.GuildScheduledEvents]: [
+        GatewayDispatchEvents.GuildScheduledEventCreate,
+        GatewayDispatchEvents.GuildScheduledEventUpdate,
+        GatewayDispatchEvents.GuildScheduledEventDelete,
+        GatewayDispatchEvents.GuildScheduledEventUserAdd,
+        GatewayDispatchEvents.GuildScheduledEventUserRemove
+    ],
+
+    [GatewayIntentBits.MessageContent]: []
 };
 
 export class EventParser implements IEventParser {
-    getRequirements(event: string): string {
-        if (event === 'test') return 'ok';
+    getRequirements(event: GatewayDispatchEvents): IntentsString {
+        const intentBit = (
+            Object.keys(eventsByIntents) as unknown as GatewayIntentBits[]
+        ).find((intent: GatewayIntentBits) =>
+            eventsByIntents[intent].includes(event)
+        );
+
+        return (Object.keys(Intents.FLAGS) as unknown as IntentsString[]).find(
+            (intent: IntentsString) => Intents.FLAGS[intent] === intentBit
+        );
     }
 }
