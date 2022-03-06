@@ -117,15 +117,21 @@ const eventsByIntents: EventsByIntent = {
 };
 
 export class EventParser implements IEventParser {
-    getRequirements(event: GatewayDispatchEvents): IntentsString {
-        const intentBit = (
+    getRequirements(event: GatewayDispatchEvents): IntentsString[] {
+        const intentBits: string[] = (
             Object.keys(eventsByIntents) as unknown as GatewayIntentBits[]
-        ).find((intent: GatewayIntentBits) =>
-            eventsByIntents[intent].includes(event)
+        )
+            .filter((intent: GatewayIntentBits) =>
+                eventsByIntents[intent].includes(event)
+            )
+            .map((value: number) => value.toString()); // GatewayIntentBits[] are actually string[]
+
+        const intents = (
+            Object.keys(Intents.FLAGS) as unknown as IntentsString[]
+        ).filter((intent: IntentsString) =>
+            intentBits.includes(Intents.FLAGS[intent].toString())
         );
 
-        return (Object.keys(Intents.FLAGS) as unknown as IntentsString[]).find(
-            (intent: IntentsString) => Intents.FLAGS[intent] === intentBit
-        );
+        return intents;
     }
 }

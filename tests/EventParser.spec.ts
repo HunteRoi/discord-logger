@@ -9,14 +9,14 @@ describe('EventParser', () => {
     });
 
     describe('getRequirements', () => {
-        it('should return the expected string', () => {
+        it('should return the expected strings', () => {
             const event: GatewayDispatchEvents =
                 GatewayDispatchEvents.GuildCreate;
-            const expected: IntentsString = 'GUILDS';
+            const expected: IntentsString[] = ['GUILDS'];
 
             const actual = new EventParser().getRequirements(event);
 
-            expect(() => expected === actual).toBeTruthy();
+            expect(actual).toEqual(expected);
         });
     });
 });
