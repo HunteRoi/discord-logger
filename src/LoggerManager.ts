@@ -46,4 +46,9 @@ export class LoggerManager extends EventEmitter {
 			this.listenedEvents.push(event);
 		}
 	}
+
+	public stopListeningTo(event: GatewayDispatchEvents) {
+		const index = this.listenedEvents.indexOf(event);
+		if (index !== -1) this.listenedEvents.splice(index, 1);
+	}
 }
