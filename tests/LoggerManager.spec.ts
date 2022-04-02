@@ -76,9 +76,18 @@ describe('LoggerManager', () => {
 			const event = GatewayDispatchEvents.ChannelCreate
 			sut.listenTo(event);
 
-			sut.stopListeningTo(GatewayDispatchEvents.ChannelCreate);
+			sut.stopListeningTo(event);
 
 			expect(sut.listenedEvents).not.toContain(event);
 		});
+
+		it('should not remove any event from the events list if the event is not registerd in the first place', () => {
+			const sut = new LoggerManager(options, client, modules);
+			const event = GatewayDispatchEvents.ChannelCreate;
+
+			expect(sut.listenedEvents).not.toContain(event);
+			sut.stopListeningTo(event);
+			expect(sut.listenedEvents).not.toContain(event);
+		})
 	});
 });
