@@ -1,5 +1,5 @@
 import { EventEmitter } from 'stream';
-import { Client } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 
 import { EventParser } from './EventParser';
 import { IEventParser, IModule, LoggerOptions } from '@types';
@@ -28,6 +28,13 @@ export class LoggerManager extends EventEmitter {
 	}
 
 	public listenTo(event: GatewayDispatchEvents) {
+		const requirements = this._eventParser.getRequirements(event);
+		const intents = new Intents(this._client.options.intents).toArray();
+
+		if (requirements !== [] && intents.every(intent => !requirements.includes(intent))) {
+			return;
+		}
+
 		if (!this.listenedEvents.includes(event)) {
 			this.listenedEvents.push(event);
 		}

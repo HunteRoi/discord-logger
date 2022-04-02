@@ -1,5 +1,5 @@
 import { GatewayDispatchEvents } from 'discord-api-types/v10';
-import { Client } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import { LoggerManager, LoggerOptions, IModule } from '../src';
 
 describe('LoggerManager', () => {
@@ -8,7 +8,7 @@ describe('LoggerManager', () => {
 	let client: Client;
 
 	beforeEach(() => {
-		client = new Client({ intents: [] });
+		client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 		options = {};
 		modules = [];
 	});
@@ -56,10 +56,19 @@ describe('LoggerManager', () => {
 			sut.listenTo(expected);
 			sut.listenTo(expected);
 
-			const actual = expect(sut.listenedEvents);
+			const expectation = expect(sut.listenedEvents);
+			expectation.toContain(expected);
+			expectation.toHaveLength(1);
+		});
 
-			actual.toContain(expected);
-			actual.toHaveLength(1);
+		it('should not add event if requirements are not met', () => {
+			client = new Client({ intents: [] });
+			const sut = new LoggerManager(options, client, modules);
+			const event = GatewayDispatchEvents.ChannelCreate;
+
+			sut.listenTo(event);
+
+			expect(sut.listenedEvents).not.toContain(event);
 		});
 	});
 });
