@@ -27,12 +27,18 @@ export class LoggerManager extends EventEmitter {
 		this.listenedEvents = [];
 	}
 
-	public listenTo(event: GatewayDispatchEvents) {
+	private meetsRequirements(event: GatewayDispatchEvents): boolean {
 		const requirements = this._eventParser.getRequirements(event);
 		const intents = new Intents(this._client.options.intents).toArray();
 
-		if (requirements !== [] && intents.every(intent => !requirements.includes(intent))) {
-			console.warn(`${event} requires one of the intents ${JSON.stringify(intents)} but none were found.`);
+		console.debug(`${event} requirements are ${JSON.stringify(requirements)}`);
+
+		return requirements !== [] && intents.every(intent => !requirements.includes(intent));
+	}
+
+	public listenTo(event: GatewayDispatchEvents) {
+		if (this.meetsRequirements(event)) {
+			console.warn(`${event} requires specific intents but none were found.`);
 			return;
 		}
 
