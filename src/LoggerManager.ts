@@ -32,6 +32,7 @@ export class LoggerManager extends EventEmitter {
 		const intents = new Intents(this._client.options.intents).toArray();
 
 		if (requirements !== [] && intents.every(intent => !requirements.includes(intent))) {
+			console.warn(`${event} requires one of the intents ${JSON.stringify(intents)} but none were found.`);
 			return;
 		}
 
