@@ -88,6 +88,6 @@ describe('LoggerManager', () => {
 			expect(sut.listenedEvents).not.toContain(event);
 			sut.stopListeningTo(event);
 			expect(sut.listenedEvents).not.toContain(event);
-		})
+		});
 	});
 });
