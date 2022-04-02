@@ -1,3 +1,4 @@
+import { GatewayDispatchEvents } from 'discord-api-types/v10';
 import { Client } from 'discord.js';
 import { LoggerManager, LoggerOptions, IModule } from '../src';
 
@@ -36,5 +37,16 @@ describe('LoggerManager', () => {
 		expect(() => new LoggerManager(options, null)).toThrowError(
 			'You must provide a client'
 		);
+	});
+
+	describe('listenTo', () => {
+		it('should add event to events list', () => {
+			const sut = new LoggerManager(options, client, modules);
+			const event = GatewayDispatchEvents.ChannelCreate;
+
+			sut.listenTo(event);
+
+			expect(sut.listenedEvents).toContain(event);
+		});
 	});
 });
