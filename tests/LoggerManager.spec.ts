@@ -40,13 +40,26 @@ describe('LoggerManager', () => {
 	});
 
 	describe('listenTo', () => {
-		it('should add event to events list', () => {
+		it('should add event to the events list', () => {
 			const sut = new LoggerManager(options, client, modules);
-			const event = GatewayDispatchEvents.ChannelCreate;
+			const expected = GatewayDispatchEvents.ChannelCreate;
 
-			sut.listenTo(event);
+			sut.listenTo(expected);
 
-			expect(sut.listenedEvents).toContain(event);
+			expect(sut.listenedEvents).toContain(expected);
+		});
+
+		it('should not add twice an event to the events list', () => {
+			const sut = new LoggerManager(options, client, modules);
+			const expected = GatewayDispatchEvents.ChannelCreate;
+
+			sut.listenTo(expected);
+			sut.listenTo(expected);
+
+			const actual = expect(sut.listenedEvents);
+
+			actual.toContain(expected);
+			actual.toHaveLength(1);
 		});
 	});
 });

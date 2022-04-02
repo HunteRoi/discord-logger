@@ -28,6 +28,8 @@ export class LoggerManager extends EventEmitter {
 	}
 
 	public listenTo(event: GatewayDispatchEvents) {
-		this.listenedEvents.push(event);
+		if (!this.listenedEvents.includes(event)) {
+			this.listenedEvents.push(event);
+		}
 	}
 }
