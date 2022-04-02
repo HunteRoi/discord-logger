@@ -2,8 +2,7 @@ import { EventEmitter } from 'stream';
 import { Client, Intents } from 'discord.js';
 
 import { EventParser } from './EventParser';
-import { IEventParser, IModule, LoggerOptions } from '@types';
-import { GatewayDispatchEvents } from 'discord-api-types/v10';
+import { IEventParser, IModule, LoggerOptions, Events } from '@types';
 
 export class LoggerManager extends EventEmitter {
 	private readonly _eventParser: IEventParser;
@@ -11,7 +10,7 @@ export class LoggerManager extends EventEmitter {
 	private readonly _options: LoggerOptions;
 	private readonly _modules: IModule[];
 
-	public readonly listenedEvents: GatewayDispatchEvents[];
+	public readonly listenedEvents: Events[];
 
 	constructor(options: LoggerOptions, client: Client, modules: IModule[] = []) {
 		super();
@@ -27,7 +26,7 @@ export class LoggerManager extends EventEmitter {
 		this.listenedEvents = [];
 	}
 
-	private meetsRequirements(event: GatewayDispatchEvents): boolean {
+	private meetsRequirements(event: Events): boolean {
 		const requirements = this._eventParser.getRequirements(event);
 		const intents = new Intents(this._client.options.intents).toArray();
 
@@ -36,7 +35,7 @@ export class LoggerManager extends EventEmitter {
 		return requirements !== [] && intents.every(intent => !requirements.includes(intent));
 	}
 
-	public listenTo(event: GatewayDispatchEvents) {
+	public listenTo(event: Events) {
 		if (this.meetsRequirements(event)) {
 			console.warn(`${event} requires specific intents but none were found.`);
 			return;
@@ -47,7 +46,7 @@ export class LoggerManager extends EventEmitter {
 		}
 	}
 
-	public stopListeningTo(event: GatewayDispatchEvents) {
+	public stopListeningTo(event: Events) {
 		const index = this.listenedEvents.indexOf(event);
 		if (index !== -1) this.listenedEvents.splice(index, 1);
 	}

@@ -1,7 +1,6 @@
 import { IntentsString } from 'discord.js';
-import { GatewayDispatchEvents } from 'discord-api-types/v10';
 
-import { EventParser } from '../src';
+import { EventParser, Events } from '../src';
 
 describe('EventParser', () => {
     it('should instanciate correctly', () => {
@@ -10,8 +9,7 @@ describe('EventParser', () => {
 
     describe('getRequirements', () => {
         it('should return the expected strings', () => {
-            const event: GatewayDispatchEvents =
-                GatewayDispatchEvents.GuildCreate;
+            const event: Events = 'guildCreate';
             const expected: IntentsString[] = ['GUILDS'];
 
             const actual = new EventParser().getRequirements(event);

@@ -1,4 +1,3 @@
-import { GatewayDispatchEvents } from 'discord-api-types/v10';
 import { Client, Intents } from 'discord.js';
 import { LoggerManager, LoggerOptions, IModule } from '../src';
 
@@ -42,7 +41,7 @@ describe('LoggerManager', () => {
 	describe('listenTo', () => {
 		it('should add event to the events list', () => {
 			const sut = new LoggerManager(options, client, modules);
-			const expected = GatewayDispatchEvents.ChannelCreate;
+			const expected = 'channelCreate';
 
 			sut.listenTo(expected);
 
@@ -51,7 +50,7 @@ describe('LoggerManager', () => {
 
 		it('should not add twice an event to the events list', () => {
 			const sut = new LoggerManager(options, client, modules);
-			const expected = GatewayDispatchEvents.ChannelCreate;
+			const expected = 'channelCreate';
 
 			sut.listenTo(expected);
 			sut.listenTo(expected);
@@ -64,7 +63,7 @@ describe('LoggerManager', () => {
 		it('should not add event if requirements are not met', () => {
 			client = new Client({ intents: [] });
 			const sut = new LoggerManager(options, client, modules);
-			const event = GatewayDispatchEvents.ChannelCreate;
+			const event = 'channelCreate';
 
 			sut.listenTo(event);
 
@@ -73,7 +72,7 @@ describe('LoggerManager', () => {
 
 		it('should remove event from the events list', () => {
 			const sut = new LoggerManager(options, client, modules);
-			const event = GatewayDispatchEvents.ChannelCreate
+			const event = 'channelCreate';
 			sut.listenTo(event);
 
 			sut.stopListeningTo(event);
@@ -83,7 +82,7 @@ describe('LoggerManager', () => {
 
 		it('should not remove any event from the events list if the event is not registerd in the first place', () => {
 			const sut = new LoggerManager(options, client, modules);
-			const event = GatewayDispatchEvents.ChannelCreate;
+			const event = 'channelCreate';
 
 			expect(sut.listenedEvents).not.toContain(event);
 			sut.stopListeningTo(event);

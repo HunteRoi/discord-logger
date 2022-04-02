@@ -1,6 +1,7 @@
-import { IntentsString } from 'discord.js';
-import { GatewayDispatchEvents } from 'discord-api-types/v10';
+import { IntentsString, ClientEvents } from 'discord.js';
+
+export type Events = keyof ClientEvents;
 
 export interface IEventParser {
-    getRequirements(event: GatewayDispatchEvents): IntentsString[];
+    getRequirements(event: Events): IntentsString[];
 }
