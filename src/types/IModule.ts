@@ -1,1 +1,3 @@
-export interface IModule {}
+export interface IModule {
+    [`on_{string}`]: any;
+}
