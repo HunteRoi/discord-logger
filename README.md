@@ -2,7 +2,7 @@
 
 # discord-logger
 
-A superset of events on top of DiscordJS ones, enabling to log events occuring in your guild
+A manager that lets you register several modules to events in one go. Built with DiscordJS
 
 ![IMAGE](assets/example.gif)
 
@@ -19,20 +19,6 @@ npm install --save @hunteroi/discord-logger
 You must use **NodeJS v16.6.0 or higher** to run a bot with this library.
 
 You also must not forget to include [mandatory intents](#mandatory-intents) and [partials](#partials) as well as give your bot the rights to read messages and commands.
-
-### Mandatory intents
-
--
-
-### Partials
-
--
-
-## Events
-
-```ts
-manager.on(LoggerManagerEvents.<eventname>, () => {});
-```
 
 ## Contribution
 
