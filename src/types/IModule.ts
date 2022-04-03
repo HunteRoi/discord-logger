@@ -1,3 +1,5 @@
-export interface IModule {
-    [`on_{string}`]: any;
-}
+import { Events } from '../types';
+
+export type IModule = {
+    [event in `on_${Events}`]: (...args: any[]) => void
+};

@@ -1,5 +1,6 @@
 import { Client, Intents } from 'discord.js';
 import { LoggerManager, LoggerOptions, IModule } from '../src';
+import { generateTestModule } from './_global';
 
 describe('LoggerManager', () => {
 	let options: LoggerOptions;
@@ -9,7 +10,7 @@ describe('LoggerManager', () => {
 	beforeEach(() => {
 		client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 		options = {};
-		modules = [];
+		modules = [generateTestModule()];
 	});
 
 	it('should instanciate correctly', () => {
@@ -45,7 +46,7 @@ describe('LoggerManager', () => {
 
 			sut.listenTo(expected);
 
-			expect(sut.listenedEvents).toContain(expected);
+			expect(sut.eventNames()).toContain(expected);
 		});
 
 		it('should not add twice an event to the events list', () => {
@@ -55,7 +56,7 @@ describe('LoggerManager', () => {
 			sut.listenTo(expected);
 			sut.listenTo(expected);
 
-			const expectation = expect(sut.listenedEvents);
+			const expectation = expect(sut.eventNames());
 			expectation.toContain(expected);
 			expectation.toHaveLength(1);
 		});
@@ -67,7 +68,7 @@ describe('LoggerManager', () => {
 
 			sut.listenTo(event);
 
-			expect(sut.listenedEvents).not.toContain(event);
+			expect(sut.eventNames()).not.toContain(event);
 		});
 
 		it('should remove event from the events list', () => {
@@ -77,16 +78,16 @@ describe('LoggerManager', () => {
 
 			sut.stopListeningTo(event);
 
-			expect(sut.listenedEvents).not.toContain(event);
+			expect(sut.eventNames()).not.toContain(event);
 		});
 
 		it('should not remove any event from the events list if the event is not registerd in the first place', () => {
 			const sut = new LoggerManager(options, client, modules);
 			const event = 'channelCreate';
 
-			expect(sut.listenedEvents).not.toContain(event);
+			expect(sut.eventNames()).not.toContain(event);
 			sut.stopListeningTo(event);
-			expect(sut.listenedEvents).not.toContain(event);
+			expect(sut.eventNames()).not.toContain(event);
 		});
 	});
 });

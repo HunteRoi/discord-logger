@@ -10,8 +10,6 @@ export class LoggerManager extends EventEmitter {
 	private readonly _options: LoggerOptions;
 	private readonly _modules: IModule[];
 
-	public readonly listenedEvents: Events[];
-
 	constructor(options: LoggerOptions, client: Client, modules: IModule[] = []) {
 		super();
 		if (!options) throw new Error('You must provide valid options!');
@@ -22,8 +20,6 @@ export class LoggerManager extends EventEmitter {
 		this._eventParser = new EventParser();
 		this._client = client;
 		this._modules = modules;
-
-		this.listenedEvents = [];
 	}
 
 	private meetsRequirements(event: Events): boolean {
@@ -41,13 +37,19 @@ export class LoggerManager extends EventEmitter {
 			return;
 		}
 
-		if (!this.listenedEvents.includes(event)) {
-			this.listenedEvents.push(event);
+		if (this.eventNames().includes(event)) {
+			console.debug(`${event} is already listened!`);
+			return;
 		}
+
+		this._modules
+			.map(module => module[`on_${event}`])
+			.forEach(listener => this.on(event, listener));
 	}
 
 	public stopListeningTo(event: Events) {
-		const index = this.listenedEvents.indexOf(event);
-		if (index !== -1) this.listenedEvents.splice(index, 1);
+		if (this.eventNames().includes(event)) {
+			this.removeAllListeners(event);
+		}
 	}
 }
