@@ -1,5 +1,9 @@
-import { Events } from '../types';
+import { Awaitable, ClientEvents } from "discord.js";
 
-export type IModule = {
-    [event in `on_${Events}`]: (...args: any[]) => void
+type IModuleHelper = {
+    [event in keyof ClientEvents as `on_${event}`]: (...args: ClientEvents[event]) => Awaitable<void>;
 };
+
+export type ModuleMethod = IModule[`on_${keyof ClientEvents}`];
+
+export interface IModule extends IModuleHelper { }

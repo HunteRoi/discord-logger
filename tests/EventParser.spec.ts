@@ -1,6 +1,6 @@
-import { IntentsString } from 'discord.js';
+import { ClientEvents, IntentsString } from 'discord.js';
 
-import { EventParser, Events } from '../src';
+import { EventParser } from '../src';
 
 describe('EventParser', () => {
     it('should instanciate correctly', () => {
@@ -9,7 +9,7 @@ describe('EventParser', () => {
 
     describe('getRequirements', () => {
         it('should return the expected strings', () => {
-            const event: Events = 'guildCreate';
+            const event: keyof ClientEvents = 'guildCreate';
             const expected: IntentsString[] = ['GUILDS'];
 
             const actual = new EventParser().getRequirements(event);
@@ -18,7 +18,7 @@ describe('EventParser', () => {
         });
 
         it('should return nothing if the event has no requirements', () => {
-            const event: Events = 'rateLimit';
+            const event: keyof ClientEvents = 'rateLimit';
             const expected: IntentsString[] = [];
 
             const actual = new EventParser().getRequirements(event);

@@ -1,8 +1,8 @@
-import { IntentsString, Constants } from 'discord.js';
+import { IntentsString, Constants, ClientEvents } from 'discord.js';
 
-import { Events, IEventParser } from '@types';
+import { IEventParser } from '@types';
 
-type EventsPerIntents = { [key in IntentsString]: Events[] };
+type EventsPerIntents = { [key in IntentsString]: (keyof ClientEvents)[] };
 
 const eventsPerIntents: EventsPerIntents = {
     GUILDS: [
@@ -115,7 +115,7 @@ const eventsPerIntents: EventsPerIntents = {
 };
 
 export class EventParser implements IEventParser {
-    getRequirements(event: Events): IntentsString[] {
+    getRequirements<Event extends keyof ClientEvents>(event: Event): IntentsString[] {
         const requirements = Object.entries(eventsPerIntents).filter(([_, events]) => events.includes(event));
         return requirements.map(([key, _]) => key as IntentsString);
     }
