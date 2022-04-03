@@ -16,5 +16,14 @@ describe('EventParser', () => {
 
             expect(actual).toEqual(expected);
         });
+
+        it('should return nothing if the event has no requirements', () => {
+            const event: Events = 'rateLimit';
+            const expected: IntentsString[] = [];
+
+            const actual = new EventParser().getRequirements(event);
+
+            expect(actual).toEqual(expected);
+        });
     });
 });

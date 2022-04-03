@@ -1,7 +1,6 @@
-import { IntentsString, ClientEvents, Constants } from 'discord.js';
+import { IntentsString, Constants } from 'discord.js';
 
 import { Events, IEventParser } from '@types';
-
 
 type EventsPerIntents = { [key in IntentsString]: Events[] };
 
