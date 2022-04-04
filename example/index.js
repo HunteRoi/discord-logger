@@ -11,18 +11,18 @@ class DiscordChannelModule {
     async on_messageCreate(message) {
         if (message.author.bot) return;
         const channel = await this.#client.channels.fetch(message.channelId);
-        await channel.send('[2] ok!!');
+        await channel.send('[DiscordChannelModule] on_messageCreate (async)');
     }
 
     on_messageUpdate(oldMessage, newMessage) {
         if (newMessage.author.bot) return;
-        newMessage.reply('[2] ah updated one I see');
+        newMessage.reply('[DiscordChannelModule] on_messageUpdate (sync)');
     }
 
     async on_messageDelete(message) {
         if (message.author.bot) return;
         const channel = await this.#client.channels.fetch(message.channelId);
-        await channel.send('[2] you deleted it????');
+        await channel.send('[DiscordChannelModule] on_messageDelete (async)');
     }
 }
 
@@ -32,17 +32,19 @@ const client = new Client({
 const modules = [
     {
         on_ready() {
-            console.log('[1] client ready!');
+            console.log('[anonymous 1] on_ready (sync)');
         },
 
         on_messageCreate(message) {
             if (message.author.bot) return;
-            console.log(`[1] ${message.content}`);
+            console.log(
+                `[anonymous 1] on_messageCreate (sync): ${message.content}`
+            );
         },
 
         async on_messageUpdate(oldMessage, newMessage) {
             if (newMessage.author.bot) return;
-            await newMessage.reply('[1] yes');
+            await newMessage.reply('[anonymous 1] on_messageUpdate (async)');
         }
     },
     new DiscordChannelModule(client)

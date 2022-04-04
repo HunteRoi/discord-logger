@@ -18,7 +18,7 @@ npm install --save @hunteroi/discord-logger
 
 You must use **NodeJS v16.6.0 or higher** to run a bot with this library.
 
-You also must not forget to include [mandatory intents](#mandatory-intents) and [partials](#partials) as well as give your bot the rights to read messages and commands.
+You also must not forget to include [mandatory intents](#mandatory-intents) to listen to events and [partials](#partials) if needed.
 
 ## Contribution
 
