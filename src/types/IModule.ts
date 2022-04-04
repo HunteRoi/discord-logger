@@ -6,4 +6,5 @@ type IModuleHelper = {
 
 export type ModuleMethod = IModule[`on_${keyof ClientEvents}`];
 
+// tslint:disable-next-line:no-empty-interface
 export interface IModule extends IModuleHelper { }
