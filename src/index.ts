@@ -1,2 +1,2 @@
-export * from './LoggerManager';
-export * from './types';
+export * from "./LoggerManager";
+export * from "./types";
