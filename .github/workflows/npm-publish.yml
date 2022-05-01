@@ -1,9 +1,12 @@
-name: Publish
+name: Node.js Package
+
 on:
   release:
     types: [created]
+
 jobs:
-  build:
+
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,8 +14,8 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-          scope: '@hunteroi'
       - run: yarn install
-      - run: yarn publish --access public
+      - run: yarn build
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
