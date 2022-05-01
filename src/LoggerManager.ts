@@ -1,6 +1,6 @@
-import { Client, ClientEvents } from "discord.js";
+import { Client, ClientEvents } from 'discord.js';
 
-import { IModule, ModuleMethod } from "@types";
+import { IModule, ModuleMethod } from '@types';
 
 export class LoggerManager<Event extends keyof ClientEvents> {
   private readonly _bindedModuleMethodsPerModuleMethods: Map<
@@ -11,7 +11,7 @@ export class LoggerManager<Event extends keyof ClientEvents> {
   private readonly _client: Client;
 
   constructor(client: Client, modules: Partial<IModule>[] = []) {
-    if (!client) throw new Error("You must provide a client!");
+    if (!client) throw new Error('You must provide a client!');
 
     this._client = client;
     this._modules = modules;

@@ -1,5 +1,5 @@
-import { ClientEvents } from "discord.js";
-import { IModule } from "../src";
+import { ClientEvents } from 'discord.js';
+import { IModule } from '../src';
 
 export function generateTestModule(): Partial<IModule> {
   const event = getTestEvent();
@@ -13,5 +13,5 @@ export function generateTestModules(): Array<Partial<IModule>> {
 }
 
 export function getTestEvent(): keyof ClientEvents {
-  return "channelCreate";
+  return 'channelCreate';
 }

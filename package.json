@@ -1,13 +1,12 @@
 {
   "name": "@hunteroi/discord-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A manager that lets you register several modules to events in one go. Built with DiscordJS",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "yarn build",
     "example": "yarn build & node ./example/index.js"
   },
   "repository": "git://github.com/hunteroi/discord-logger.git",

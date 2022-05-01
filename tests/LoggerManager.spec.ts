@@ -1,9 +1,9 @@
-import { Client, Intents } from "discord.js";
+import { Client, Intents } from 'discord.js';
 
-import { LoggerManager, IModule } from "../src";
-import { generateTestModules, getTestEvent } from "./_global";
+import { LoggerManager, IModule } from '../src';
+import { generateTestModules, getTestEvent } from './_global';
 
-describe("LoggerManager", () => {
+describe('LoggerManager', () => {
   let modules: Partial<IModule>[];
   let client: Client;
 
@@ -14,7 +14,7 @@ describe("LoggerManager", () => {
     modules = [...generateTestModules()];
   });
 
-  it("should instanciate correctly", () => {
+  it('should instanciate correctly', () => {
     expect(() => new LoggerManager(client, modules)).not.toBeNull();
   });
 
@@ -22,8 +22,8 @@ describe("LoggerManager", () => {
     expect(() => new LoggerManager(client)).not.toBeNull();
   });
 
-  describe("listenWithAllModulesTo", () => {
-    it("should add all modules as listeners for the event", () => {
+  describe('listenWithAllModulesTo', () => {
+    it('should add all modules as listeners for the event', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
 
@@ -32,7 +32,7 @@ describe("LoggerManager", () => {
       expect(client.listenerCount(event)).toBe(modules.length);
     });
 
-    it("should not add twice the modules listeners to this event", () => {
+    it('should not add twice the modules listeners to this event', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
 
@@ -43,8 +43,8 @@ describe("LoggerManager", () => {
     });
   });
 
-  describe("unlistenWithAllModulesTo", () => {
-    it("should remove all modules listeners for this event", () => {
+  describe('unlistenWithAllModulesTo', () => {
+    it('should remove all modules listeners for this event', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
 
@@ -54,7 +54,7 @@ describe("LoggerManager", () => {
       expect(client.listenerCount(event)).toBe(0);
     });
 
-    it("should not remove modules for the event if it is not registered in the first place", () => {
+    it('should not remove modules for the event if it is not registered in the first place', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
 
@@ -64,8 +64,8 @@ describe("LoggerManager", () => {
     });
   });
 
-  describe("listenWithModuleTo", () => {
-    it("should listen to event with the right module", () => {
+  describe('listenWithModuleTo', () => {
+    it('should listen to event with the right module', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = { [`on_${event}`]: () => {} };
@@ -75,7 +75,7 @@ describe("LoggerManager", () => {
       expect(client.listenerCount(event)).toBe(1);
     });
 
-    it("should not add twice the same module to listen to an event", () => {
+    it('should not add twice the same module to listen to an event', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = { [`on_${event}`]: () => {} };
@@ -86,7 +86,7 @@ describe("LoggerManager", () => {
       expect(client.listenerCount(event)).toBe(1);
     });
 
-    it("should listen to an event with different modules", () => {
+    it('should listen to an event with different modules', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = { [`on_${event}`]: () => {} };
@@ -99,8 +99,8 @@ describe("LoggerManager", () => {
     });
   });
 
-  describe("unlistenWithModuleTo", () => {
-    it("should unlisten to event of the right module", () => {
+  describe('unlistenWithModuleTo', () => {
+    it('should unlisten to event of the right module', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = { [`on_${event}`]: () => {} };
@@ -111,7 +111,7 @@ describe("LoggerManager", () => {
       expect(client.listenerCount(event)).toBe(0);
     });
 
-    it("should not remove another module listening to the same event", () => {
+    it('should not remove another module listening to the same event', () => {
       const event = getTestEvent();
       const module = { [`on_${event}`]: () => {} };
       const sut = new LoggerManager(client, [...modules, module]);
