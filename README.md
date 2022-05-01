@@ -5,9 +5,9 @@
 
 A manager that lets you register several modules to events in one go. Built with DiscordJS
 
-![IMAGE](assets/example.gif)
+![IMAGE](./assets/example.gif)
 
-See [./example/index.js](example/index.js).
+See [./example/index.js](./example/index.js).
 
 ## Installation
 
