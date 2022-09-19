@@ -1,4 +1,4 @@
-import { Client, IntentsBitField } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 
 import { IModule, LoggerManager } from '../src';
 import { generateTestModules, getTestEvent } from './_global';
@@ -8,7 +8,7 @@ describe('LoggerManager', () => {
   let client: Client;
 
   beforeEach(() => {
-    client = new Client({ intents: [IntentsBitField.Flags.Guilds] });
+    client = new Client({ intents: [GatewayIntentBits.Guilds] });
     client.removeAllListeners();
 
     modules = [...generateTestModules()];
