@@ -69,7 +69,7 @@ describe('LoggerManager', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
 
       sut.listenWithModuleTo(event, module);
@@ -81,7 +81,7 @@ describe('LoggerManager', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
 
       sut.listenWithModuleTo(event, module);
@@ -94,10 +94,10 @@ describe('LoggerManager', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
       const moduleTwo = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
 
       sut.listenWithModuleTo(event, module);
@@ -112,7 +112,7 @@ describe('LoggerManager', () => {
       const sut = new LoggerManager(client, modules);
       const event = getTestEvent();
       const module = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
 
       sut.listenWithModuleTo(event, module);
@@ -124,7 +124,7 @@ describe('LoggerManager', () => {
     it('should not remove another module listening to the same event', () => {
       const event = getTestEvent();
       const module = {
-        [`on_${event}`]: () => void 0,
+        [`on_${event}`]: () => undefined,
       };
       const sut = new LoggerManager(client, [...modules, module]);
 
