@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { LoggerManager } = require('../lib');
 
 class DiscordChannelModule {
@@ -27,7 +27,7 @@ class DiscordChannelModule {
 }
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 const modules = [
   {

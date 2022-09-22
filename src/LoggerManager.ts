@@ -3,7 +3,7 @@ import { Client, ClientEvents } from 'discord.js';
 import { IModule, ModuleMethod } from '@types';
 
 export class LoggerManager<Event extends keyof ClientEvents> {
-  private readonly _bindedModuleMethodsPerModuleMethods: Map<
+  private readonly _boundModuleMethodsPerModuleMethods: Map<
     ModuleMethod,
     Map<Partial<IModule>, ModuleMethod>
   >;
@@ -15,7 +15,7 @@ export class LoggerManager<Event extends keyof ClientEvents> {
 
     this._client = client;
     this._modules = modules;
-    this._bindedModuleMethodsPerModuleMethods = new Map<
+    this._boundModuleMethodsPerModuleMethods = new Map<
       ModuleMethod,
       Map<Partial<IModule>, ModuleMethod>
     >();
@@ -36,9 +36,9 @@ export class LoggerManager<Event extends keyof ClientEvents> {
     let methodBindingMap:
       | Map<Partial<IModule>, ModuleMethod>
       | undefined
-      | null = this._bindedModuleMethodsPerModuleMethods.get(method);
+      | null = this._boundModuleMethodsPerModuleMethods.get(method);
     if (methodBindingMap === undefined) {
-      this._bindedModuleMethodsPerModuleMethods.set(
+      this._boundModuleMethodsPerModuleMethods.set(
         method,
         (methodBindingMap = new Map())
       );
@@ -46,10 +46,10 @@ export class LoggerManager<Event extends keyof ClientEvents> {
 
     if (methodBindingMap.has(module)) return;
 
-    const bindedMethod = method.bind(module);
-    methodBindingMap.set(module, bindedMethod);
+    const boundMethod = method.bind(module);
+    methodBindingMap.set(module, boundMethod);
 
-    this._client.addListener(event, bindedMethod);
+    this._client.addListener(event, boundMethod);
   }
 
   public unlistenWithModuleTo(event: Event, module: Partial<IModule>): void {
@@ -59,17 +59,17 @@ export class LoggerManager<Event extends keyof ClientEvents> {
     const methodBindingMap:
       | Map<Partial<IModule>, ModuleMethod>
       | undefined
-      | null = this._bindedModuleMethodsPerModuleMethods.get(method);
+      | null = this._boundModuleMethodsPerModuleMethods.get(method);
     if (methodBindingMap === undefined) return;
 
-    const bindedMethod = methodBindingMap.get(module);
-    if (bindedMethod === undefined) return;
+    const boundMethod = methodBindingMap.get(module);
+    if (boundMethod === undefined) return;
 
     methodBindingMap.delete(module);
     if (methodBindingMap.size === 0) {
-      this._bindedModuleMethodsPerModuleMethods.delete(method);
+      this._boundModuleMethodsPerModuleMethods.delete(method);
     }
 
-    this._client.removeListener(event, bindedMethod);
+    this._client.removeListener(event, boundMethod);
   }
 }

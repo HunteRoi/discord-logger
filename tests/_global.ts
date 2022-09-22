@@ -4,11 +4,11 @@ import { IModule } from '../src';
 export function generateTestModule(): Partial<IModule> {
   const event = getTestEvent();
   return {
-    [`on_${event}`]: () => {},
+    [`on_${event}`]: () => undefined,
   };
 }
 
-export function generateTestModules(): Array<Partial<IModule>> {
+export function generateTestModules(): Partial<IModule>[] {
   return [generateTestModule(), generateTestModule(), generateTestModule()];
 }
 
