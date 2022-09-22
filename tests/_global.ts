@@ -4,7 +4,7 @@ import { IModule } from '../src';
 export function generateTestModule(): Partial<IModule> {
   const event = getTestEvent();
   return {
-    [`on_${event}`]: () => void 0,
+    [`on_${event}`]: () => undefined,
   };
 }
 
