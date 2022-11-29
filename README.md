@@ -5,9 +5,9 @@
 
 A manager that lets you register several modules to events in one go. Built with DiscordJS
 
-![IMAGE](./assets/example.gif)
+![IMAGE](https://raw.githubusercontent.com/HunteRoi/discord-logger/master/assets/example.gif)
 
-See [./example/index.js](./example/index.js).
+See [./examples/index.js](https://github.com/hunteroi/discord-logger/tree/master/examples/index.js).
 
 ## Installation
 

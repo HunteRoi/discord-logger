@@ -12,8 +12,16 @@
     "paths": {
       "@handlers/*": ["handlers/*"],
       "@types": ["types/index.ts"]
-    }
+    },
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["lib/*", "coverage/*", "tcr"]
+  "exclude": ["lib/*", "coverage/*", "tcr", "node_modules/*"],
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "out": "docs/api-docs",
+    "exclude": ["node_modules"],
+    "excludePrivate": true,
+    "hideGenerator": true
+  }
 }
