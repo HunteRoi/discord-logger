@@ -10,7 +10,7 @@
     "build:docs": "typedoc",
     "prepublish": "yarn build:docs && yarn test:coverage",
     "lint": "tslint -p tsconfig.json",
-    "example": "yarn build & node ./example/index.js"
+    "example": "yarn build & node ./examples/index.js"
   },
   "repository": "git://github.com/hunteroi/discord-logger.git",
   "keywords": [
