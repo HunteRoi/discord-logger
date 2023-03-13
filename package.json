@@ -1,6 +1,6 @@
 {
   "name": "@hunteroi/discord-logger",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A manager that lets you register several modules to events in one go. Built with DiscordJS",
   "main": "lib/index.js",
   "scripts": {
@@ -49,6 +49,6 @@
   "dependencies": {
     "discord-api-types": "^0.37.10",
     "discord-logs": "^2.2.1",
-    "discord.js": "^14.3.0"
+    "discord.js": "14.x"
   }
 }
