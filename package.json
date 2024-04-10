@@ -5,17 +5,15 @@
   },
   "description": "A manager that lets you register several modules to events in one go. Built with DiscordJS",
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
+    "@biomejs/biome": "1.6.4",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
     "discord.js": "^14.14.1",
-    "eslint": "^9.0.0",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "ts-jest": "^29.1.2",
     "typedoc": "^0.25.13",
-    "typescript": "^5.4.4",
-    "typescript-eslint": "^7.6.0"
+    "typescript": "^5.4.4"
   },
   "directories": {
     "lib": "lib"
@@ -44,9 +42,9 @@
   "scripts": {
     "build": "tsc",
     "build:docs": "typedoc",
-    "example": "yarn build & node ./examples/index.js",
-    "lint": "eslint ./src ./tests",
+    "lint": "biome check --apply ./src ./tests",
     "prepublish": "yarn lint && yarn build && yarn build:docs && yarn test:coverage",
+    "start": "yarn build & node ./examples/index.js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

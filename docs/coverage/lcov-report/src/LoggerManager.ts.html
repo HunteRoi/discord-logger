@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.87% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/32</span>
+                <span class='fraction'>32/33</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
@@ -136,7 +136,12 @@
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
 <a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,14 +163,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -174,6 +183,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,78 +219,83 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Client, ClientEvents } from 'discord.js';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Client, ClientEvents } from "discord.js";
 &nbsp;
-import { IModule, ModuleMethod } from '@types';
+import type { IModule, ModuleMethod } from "@types";
 &nbsp;
 export class LoggerManager&lt;Event extends keyof ClientEvents&gt; {
-  private readonly _boundModuleMethodsPerModuleMethods: Map&lt;
-    ModuleMethod,
-    Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
-  &gt;;
-  private readonly _modules: Partial&lt;IModule&gt;[];
-  private readonly _client: Client;
+    private readonly _boundModuleMethodsPerModuleMethods: Map&lt;
+        ModuleMethod,
+        Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
+    &gt;;
+    private readonly _modules: Partial&lt;IModule&gt;[];
+    private readonly _client: Client;
 &nbsp;
-  constructor(client: Client, modules: Partial&lt;IModule&gt;[] = <span class="branch-0 cbranch-no" title="branch not covered" >[])</span> {
-    this._client = client;
-    this._modules = modules;
-    this._boundModuleMethodsPerModuleMethods = new Map&lt;
-      ModuleMethod,
-      Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
-    &gt;();
-  }
-&nbsp;
-  public listenWithAllModulesTo(event: Event) {
-    this._modules.forEach((module) =&gt; this.listenWithModuleTo(event, module));
-  }
-&nbsp;
-  public unlistenWithAllModulesTo(event: Event) {
-    this._modules.forEach((module) =&gt; this.unlistenWithModuleTo(event, module));
-  }
-&nbsp;
-  public listenWithModuleTo(event: Event, module: Partial&lt;IModule&gt;): void {
-    const method: ModuleMethod | undefined | null = module[`on_${event}`];
-    if (!method) return;
-&nbsp;
-    let methodBindingMap:
-      | Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
-      | undefined
-      | null = this._boundModuleMethodsPerModuleMethods.get(method);
-    if (!methodBindingMap) {
-      this._boundModuleMethodsPerModuleMethods.set(
-        method,
-        (methodBindingMap = new Map())
-      );
+    constructor(client: Client, modules: Partial&lt;IModule&gt;[] = <span class="branch-0 cbranch-no" title="branch not covered" >[])</span> {
+        this._client = client;
+        this._modules = modules;
+        this._boundModuleMethodsPerModuleMethods = new Map&lt;
+            ModuleMethod,
+            Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
+        &gt;();
     }
 &nbsp;
-    if (methodBindingMap.has(module)) return;
-&nbsp;
-    const boundMethod = method.bind(module);
-    methodBindingMap.set(module, boundMethod);
-&nbsp;
-    this._client.addListener(event, boundMethod);
-  }
-&nbsp;
-  public unlistenWithModuleTo(event: Event, module: Partial&lt;IModule&gt;): void {
-    const method: ModuleMethod | undefined | null = module[`on_${event}`];
-    if (!method) return;
-&nbsp;
-    const methodBindingMap:
-      | Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
-      | undefined
-      | null = this._boundModuleMethodsPerModuleMethods.get(method);
-    if (!methodBindingMap) return;
-&nbsp;
-    const boundMethod = methodBindingMap.get(module);
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!boundMethod) <span class="cstat-no" title="statement not covered" >return;</span>
-&nbsp;
-    methodBindingMap.delete(module);
-    if (methodBindingMap.size === 0) {
-      this._boundModuleMethodsPerModuleMethods.delete(method);
+    public listenWithAllModulesTo(event: Event) {
+        for (const module of this._modules) {
+            this.listenWithModuleTo(event, module);
+        }
     }
 &nbsp;
-    this._client.removeListener(event, boundMethod);
-  }
+    public unlistenWithAllModulesTo(event: Event) {
+        for (const module of this._modules) {
+            this.unlistenWithModuleTo(event, module);
+        }
+    }
+&nbsp;
+    public listenWithModuleTo(event: Event, module: Partial&lt;IModule&gt;): void {
+        const method: ModuleMethod | undefined | null = module[`on_${event}`];
+        if (!method) return;
+&nbsp;
+        let methodBindingMap:
+            | Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
+            | undefined
+            | null = this._boundModuleMethodsPerModuleMethods.get(method);
+        if (!methodBindingMap) {
+            methodBindingMap = new Map();
+            this._boundModuleMethodsPerModuleMethods.set(
+                method,
+                methodBindingMap,
+            );
+        }
+&nbsp;
+        if (methodBindingMap.has(module)) return;
+&nbsp;
+        const boundMethod = method.bind(module);
+        methodBindingMap.set(module, boundMethod);
+&nbsp;
+        this._client.addListener(event, boundMethod);
+    }
+&nbsp;
+    public unlistenWithModuleTo(event: Event, module: Partial&lt;IModule&gt;): void {
+        const method: ModuleMethod | undefined | null = module[`on_${event}`];
+        if (!method) return;
+&nbsp;
+        const methodBindingMap:
+            | Map&lt;Partial&lt;IModule&gt;, ModuleMethod&gt;
+            | undefined
+            | null = this._boundModuleMethodsPerModuleMethods.get(method);
+        if (!methodBindingMap) return;
+&nbsp;
+        const boundMethod = methodBindingMap.get(module);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!boundMethod) <span class="cstat-no" title="statement not covered" >return;</span>
+&nbsp;
+        methodBindingMap.delete(module);
+        if (methodBindingMap.size === 0) {
+            this._boundModuleMethodsPerModuleMethods.delete(method);
+        }
+&nbsp;
+        this._client.removeListener(event, boundMethod);
+    }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -289,7 +304,7 @@ export class LoggerManager&lt;Event extends keyof ClientEvents&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 10 2024 16:44:52 GMT+0200 (Central European Summer Time)
+                at Wed Apr 10 2024 18:00:49 GMT+0200 (Central European Summer Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
