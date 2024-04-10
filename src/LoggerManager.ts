@@ -11,8 +11,6 @@ export class LoggerManager<Event extends keyof ClientEvents> {
   private readonly _client: Client;
 
   constructor(client: Client, modules: Partial<IModule>[] = []) {
-    if (!client) throw new Error('You must provide a client!');
-
     this._client = client;
     this._modules = modules;
     this._boundModuleMethodsPerModuleMethods = new Map<
@@ -31,13 +29,13 @@ export class LoggerManager<Event extends keyof ClientEvents> {
 
   public listenWithModuleTo(event: Event, module: Partial<IModule>): void {
     const method: ModuleMethod | undefined | null = module[`on_${event}`];
-    if (method === undefined) return;
+    if (!method) return;
 
     let methodBindingMap:
       | Map<Partial<IModule>, ModuleMethod>
       | undefined
       | null = this._boundModuleMethodsPerModuleMethods.get(method);
-    if (methodBindingMap === undefined) {
+    if (!methodBindingMap) {
       this._boundModuleMethodsPerModuleMethods.set(
         method,
         (methodBindingMap = new Map())
@@ -54,16 +52,16 @@ export class LoggerManager<Event extends keyof ClientEvents> {
 
   public unlistenWithModuleTo(event: Event, module: Partial<IModule>): void {
     const method: ModuleMethod | undefined | null = module[`on_${event}`];
-    if (method === undefined) return;
+    if (!method) return;
 
     const methodBindingMap:
       | Map<Partial<IModule>, ModuleMethod>
       | undefined
       | null = this._boundModuleMethodsPerModuleMethods.get(method);
-    if (methodBindingMap === undefined) return;
+    if (!methodBindingMap) return;
 
     const boundMethod = methodBindingMap.get(module);
-    if (boundMethod === undefined) return;
+    if (!boundMethod) return;
 
     methodBindingMap.delete(module);
     if (methodBindingMap.size === 0) {

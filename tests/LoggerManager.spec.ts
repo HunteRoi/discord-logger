@@ -105,6 +105,40 @@ describe('LoggerManager', () => {
 
       expect(client.listenerCount(event)).toBe(2);
     });
+
+    it('should not listen to an event if the module does not have the method', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {};
+
+      sut.listenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
+
+    it('should not listen to an event if the module has the method as undefined', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {
+        [`on_${event}`]: undefined,
+      };
+
+      sut.listenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
+
+    it('should not listen to an event if the module has the method as null', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {
+        [`on_${event}`]: null,
+      };
+
+      sut.listenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
   });
 
   describe('unlistenWithModuleTo', () => {
@@ -132,6 +166,52 @@ describe('LoggerManager', () => {
       expect(client.listenerCount(event)).toBe(modules.length + 1);
       sut.unlistenWithModuleTo(event, module);
       expect(client.listenerCount(event)).toBe(modules.length);
+    });
+
+    it('should not remove a module if it is not listening to the event', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {
+        [`on_${event}`]: () => undefined,
+      };
+
+      sut.unlistenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
+
+    it('should not remove a module if it does not have the method', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {};
+
+      sut.unlistenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
+
+    it('should not remove a module if the method is undefined', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {
+        [`on_${event}`]: undefined,
+      };
+
+      sut.unlistenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
+    });
+
+    it('should not remove a module if the method is null', () => {
+      const sut = new LoggerManager(client, modules);
+      const event = getTestEvent();
+      const module = {
+        [`on_${event}`]: null,
+      };
+
+      sut.unlistenWithModuleTo(event, module);
+
+      expect(client.listenerCount(event)).toBe(0);
     });
   });
 });
