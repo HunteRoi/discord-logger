@@ -1,7 +1,7 @@
 import type { Awaitable, ClientEvents } from "discord.js";
 
 type IModuleHelper = {
-    [event in keyof ClientEvents as `on_${event}`]: (
+    [event in keyof ClientEvents as `on_${event}`]?: (
         ...args: ClientEvents[event]
     ) => Awaitable<void>;
 };

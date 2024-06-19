@@ -1,5 +1,6 @@
 import type { ClientEvents } from "discord.js";
-import type { IModule } from "../src";
+
+import type { IModule } from "../src/index.js";
 
 export function generateTestModule(): Partial<IModule> {
     const event = getTestEvent();

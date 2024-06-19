@@ -1,2 +1,2 @@
-export * from "./LoggerManager";
-export * from "./types";
+export * from "./LoggerManager.js";
+export * from "./types/index.js";

@@ -3,26 +3,18 @@
     "baseUrl": "./src",
     "declaration": true,
     "esModuleInterop": true,
-    "module": "commonjs",
     "outDir": "./lib",
-    "paths": {
-      "@handlers/*": [
-        "handlers/*"
-      ],
-      "@types": [
-        "types/index.ts"
-      ]
-    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es6"
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   },
   "exclude": [
     "lib/*",
     "coverage/*",
-    "tcr",
     "node_modules/*"
   ],
   "include": [

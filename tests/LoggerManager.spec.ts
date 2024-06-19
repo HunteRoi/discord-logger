@@ -1,7 +1,8 @@
+import { jest } from "@jest/globals";
 import { Client, GatewayIntentBits } from "discord.js";
 
-import { type IModule, LoggerManager } from "../src";
-import { generateTestModules, getTestEvent } from "./_global";
+import { type IModule, LoggerManager } from "../src/index.js";
+import { generateTestModules, getTestEvent } from "./_global.js";
 
 describe("LoggerManager", () => {
     let modules: Partial<IModule>[];

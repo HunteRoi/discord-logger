@@ -44,10 +44,10 @@
     "build:docs": "typedoc",
     "lint": "biome check --apply ./src ./tests",
     "prepublish": "yarn lint && yarn build && yarn build:docs && yarn test:coverage",
-    "start": "yarn build & node ./examples/index.js",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "start": "yarn build && tsc ./examples/index.ts --target esnext --module nodenext --moduleResolution nodenext && node ./examples/index.js",
+    "test": "yarn node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "yarn node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "type": "module",
-  "version": "1.1.2"
+  "version": "1.2.0"
 }

@@ -1,6 +1,6 @@
 import type { Client, ClientEvents } from "discord.js";
 
-import type { IModule, ModuleMethod } from "@types";
+import type { IModule, ModuleMethod } from "./types/index.js";
 
 export class LoggerManager<Event extends keyof ClientEvents> {
     private readonly _boundModuleMethodsPerModuleMethods: Map<
