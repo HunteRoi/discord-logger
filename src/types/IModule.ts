@@ -1,9 +1,9 @@
-import { Awaitable, ClientEvents } from 'discord.js';
+import type { Awaitable, ClientEvents } from "discord.js";
 
 type IModuleHelper = {
-  [event in keyof ClientEvents as `on_${event}`]: (
-    ...args: ClientEvents[event]
-  ) => Awaitable<void>;
+    [event in keyof ClientEvents as `on_${event}`]?: (
+        ...args: ClientEvents[event]
+    ) => Awaitable<void>;
 };
 
 export type ModuleMethod = IModule[`on_${keyof ClientEvents}`];
